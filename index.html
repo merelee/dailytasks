@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+	<title>Daily Tasks</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="style/reset.css">
+	<link rel="stylesheet" href="style/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+<section id="container">
+    <h1>Daily Tasks</h1>
+
+</section>
+    
+<script>
+    var jsonData = [
+        { "name": "Shower", "category": "Daily" },
+        { "name": "Brush Teeth", "category": "daily" },
+        { "name": "Take Medicine", "category": "Daily" },
+        { "name": "wash water bottle", "category": "Weekly" },
+        { "name": "clean room", "category": "Weekly" },
+        { "name": "update budget sheet", "category": "finances" }
+    ];
+
+    var main = $("#container");
+    var categoryList = {};
+
+    $.each(jsonData, function(index, item) {
+        var category = item.category.toLowerCase(); //make categories case insensitive
+        var div = $("<div>").text(item.name);
+        div.addClass("item");
+
+        if (!categoryList[category]) { //check if category already exists. if not, create it
+            categoryList[category] = $("<div>").html("<h2>" + category + "</h2>");
+            main.append(categoryList[category]);
+        }
+            
+        categoryList[category].append(div);
+
+        div.on("click", function() {
+            $(this).hide();
+        });
+    });
+</script>
+    
+</body>
+</html>
